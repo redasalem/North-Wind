@@ -20,8 +20,7 @@ app.use(cors());
 
 app.use(clerkMiddleware())
 
-
-
+// Serve frontend static files in production
 const publicDir = path.join(process.cwd(), "public");
 if (fs.existsSync(publicDir)) {
   app.use(express.static(publicDir));
@@ -39,11 +38,9 @@ if (fs.existsSync(publicDir)) {
   });
 }
 
-
-
 app.listen(env.PORT, () => {
   console.log(`Listening on port: ${env.PORT}`);
   // if (process.env.NODE_ENV === "production") {
   //   keepAliveCron.start();
   // }
-});
+});
