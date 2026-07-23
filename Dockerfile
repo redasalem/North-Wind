@@ -13,6 +13,7 @@ ENV VITE_API_URL=
 # Public Clerk key (safe to pass as build-arg; it is embedded in client JS anyway)
 ARG VITE_CLERK_PUBLISHABLE_KEY
 ENV VITE_CLERK_PUBLISHABLE_KEY=$VITE_CLERK_PUBLISHABLE_KEY
+ENV NODE_OPTIONS=--max-old-space-size=384
 RUN pnpm run build
 
 # --- Stage 2: compile the API (TypeScript → JavaScript) ---
