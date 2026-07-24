@@ -20,6 +20,11 @@ app.use(cors());
 
 app.use(clerkMiddleware())
 
+//get health
+app.use("/health", (_req, res) => {
+  res.send("ok => server is running ");
+});
+
 // Serve frontend static files in production
 const publicDir = path.join(process.cwd(), "public");
 if (fs.existsSync(publicDir)) {
@@ -43,4 +48,4 @@ app.listen(env.PORT, () => {
   // if (process.env.NODE_ENV === "production") {
   //   keepAliveCron.start();
   // }
-});
+});
