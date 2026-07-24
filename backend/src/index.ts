@@ -22,7 +22,7 @@ app.use(clerkMiddleware())
 
 //get health
 app.use("/health", (_req, res) => {
-  res.send("ok => server is running ");
+  res.json({ ok:true });
 });
 
 // Serve frontend static files in production
