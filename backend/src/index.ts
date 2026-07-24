@@ -20,9 +20,9 @@ app.use(cors());
 
 app.use(clerkMiddleware())
 
-//get health
-app.use("/health", (_req, res) => {
-  res.json({ ok:true });
+// Health check endpoint
+app.get(["/health", "/api/health"], (_req, res) => {
+  res.json({ ok: true, status: "healthy", timestamp: new Date().toISOString() });
 });
 
 // Serve frontend static files in production
@@ -35,11 +35,11 @@ if (fs.existsSync(publicDir)) {
       next();
       return;
     }
-     if (req.path.startsWith("/api") || req.path.startsWith("/webhooks")) {
+    if (req.path.startsWith("/api") || req.path.startsWith("/webhooks") || req.path.startsWith("/health")) {
       next();
       return;
     }
-       res.sendFile(path.join(publicDir, "index.html"), (err) => next(err));
+    res.sendFile(path.join(publicDir, "index.html"), (err) => next(err));
   });
 }
 
